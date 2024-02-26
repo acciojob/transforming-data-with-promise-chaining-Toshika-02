@@ -1,67 +1,65 @@
 //your JS code here. If required.
-const input = document.getElementById('ip');
-const output = document.getElementById('output');
-const btn = document.getElementById('btn');
+let input = document.getElementById("ip");
+let btn = document.getElementById("btn");
+let output = document.getElementById("output")
 
-btn.addEventListener('click', () => {
+btn.addEventListener("click" , PromiseChaining)
+function PromiseChaining(){
   const promise1 = new Promise((resolve) => {
     setTimeout(() => {
-      resolve(Number(input.value));
+      resolve(input.value);
     }, 2000);
   });
 
-  promise1.then((num) => {
-    output.textContent = `Result: ${num}`;
-    return num;
-  })
-  .then((num) => {
-    const promise2 = new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(num * 2);
-      }, 1000);
+  promise1
+    .then((result) => {
+      output.textContent = `Result: ${result}`;
+      return result;
+    })
+    .then((result) => {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(result * 2);
+        }, 1000);
+      });
+    })
+    .then((result) => {
+      output.textContent = `Result: ${result}`;
+      return result;
+    })
+    .then((result) => {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(result - 3);
+        }, 1000);
+      });
+    })
+    .then((result) => {
+      output.textContent = `Result: ${result}`;
+      return result;
+    })
+    .then((result) => {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(result / 2);
+        }, 1000);
+      });
+    })
+    .then((result) => {
+      output.textContent = `Result: ${result}`;
+      return result;
+    })
+    .then((result) => {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(result + 10);
+        }, 1000);
+      });
+    })
+    .then((result) => {
+      output.textContent = `Final Result: ${result}`;
+    })
+    .catch((error) => {
+      console.error(error);
     });
-    return promise2;
-  })
-  .then((num) => {
-    output.textContent = `Result: ${num}`;
-    return num;
-  })
-  .then((num) => {
-    const promise3 = new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(num - 3);
-      }, 1000);
-    });
-    return promise3;
-  })
-  .then((num) => {
-    output.textContent = `Result: ${num}`;
-    return num;
-  })
-  .then((num) => {
-    const promise4 = new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(num / 2);
-      }, 1000);
-    });
-    return promise4;
-  })
-  .then((num) => {
-    output.textContent = `Result: ${num}`;
-    return num;
-  })
-  .then((num) => {
-    const promise5 = new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(num + 10);
-      }, 1000);
-    });
-    return promise5;
-  })
-  .then((num) => {
-    output.textContent = `Final Result: ${num}`;
-  })
-  .catch((error) => {
-    console.log(error);
-  });
-});
+}
